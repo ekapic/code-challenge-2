@@ -14,16 +14,21 @@ namespace CalculoEstadisiticas
 
     class Program
     {
-        const int exitProgram = 0;
+        const int exitNumber = 0;
+        const string exitExpression = "done";
 
         static void Main(string[] args)
-        {
+        {            
+            IEnumerable<int> numbers;
             int op = MainMenu();
-            while (op > 0)
+
+            while (op > exitNumber)
             {
                 switch (op)
                 {
                     case 1:
+                        numbers = InsertNumbers();
+                        Operations.GetMedia(numbers);
                         break;
                     case 2:
                         break;
@@ -32,6 +37,8 @@ namespace CalculoEstadisiticas
                         Console.WriteLine("Por favor entra un valor existente en el menú");
                         break;
                 }
+                op = MainMenu();
+                Console.Clear();
             }
         }
 
@@ -43,8 +50,25 @@ namespace CalculoEstadisiticas
             Console.WriteLine("2.-Lectura de fichero de datos");
             Console.WriteLine("0.-Salir");
             Console.WriteLine("-----------------------------------");
-            option = int.Parse(Console.ReadLine());
+            option = InputValidator.GetNumeric(Console.ReadLine());
             return option;
+        }
+
+        static List<int> InsertNumbers()
+        {
+            string stringInput = String.Empty;
+            List<int> numArray = new List<int>();
+            do
+            {
+                Console.WriteLine("Introduzca un número o ponga 'done' para finalizar");
+                stringInput = Console.ReadLine();
+                if(stringInput != exitExpression)
+                {
+                    numArray.Add(InputValidator.GetNumeric(stringInput));
+                }
+                
+            } while (stringInput != exitExpression);
+            return numArray;
         }
     }
 }
