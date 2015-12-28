@@ -1,22 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace CalculoEstadisiticas
 {
+    using System;
+
     static class InputValidator
     {
-        static public int GetNumeric(string readLine)
+        static public float GetDecimal(string readLine)
+        {
+            float number;
+            bool isDecimal = float.TryParse(readLine,out number);
+            while (!isDecimal || number < 0)
+            {
+                Console.WriteLine("Introduce un numero decimal");
+                readLine = Console.ReadLine();
+                isDecimal = float.TryParse(readLine, out number);
+            }
+            return number;
+        }
+
+        static public int GetInteger(string readLine)
         {
             int number;
-            bool isNumeric = int.TryParse(readLine,out number);
-            while(!isNumeric || number < 0)
+            bool isInteger = int.TryParse(readLine,out number);
+            while (!isInteger || number < 0)
             {
-                Console.WriteLine("Introduce un numero correcto");
+                Console.WriteLine("Introduce un numero entero");
                 readLine = Console.ReadLine();
-                isNumeric = int.TryParse(readLine, out number);
+                isInteger = int.TryParse(readLine, out number);
             }
             return number;
         }

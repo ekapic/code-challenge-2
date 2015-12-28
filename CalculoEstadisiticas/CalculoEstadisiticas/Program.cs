@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CalculoEstadisiticas
+﻿namespace CalculoEstadisiticas
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
 
     class Program
     {
         const int exitNumber = 0;
         const string exitExpression = "done";
+        const string decimalFormat = "0.00";
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {            
-            IEnumerable<int> numbers;
+            IEnumerable<float> numbers;
             int op = MainMenu();
 
             while (op > exitNumber)
@@ -28,9 +21,11 @@ namespace CalculoEstadisiticas
                 {
                     case 1:
                         numbers = InsertNumbers();
-                        Operations.GetMedia(numbers);
+                        ShowResult(numbers);
                         break;
                     case 2:
+                        //TODO: Leer de fichero devolver lista de numeros
+                        //TODO: Llamar a ShowResult(numbers)
                         break;
 
                     default:
@@ -42,7 +37,7 @@ namespace CalculoEstadisiticas
             }
         }
 
-        static int MainMenu()
+        private static int MainMenu()
         {
             int option = 0;
             Console.WriteLine("-----------------------------------");
@@ -50,25 +45,37 @@ namespace CalculoEstadisiticas
             Console.WriteLine("2.-Lectura de fichero de datos");
             Console.WriteLine("0.-Salir");
             Console.WriteLine("-----------------------------------");
-            option = InputValidator.GetNumeric(Console.ReadLine());
+            option = InputValidator.GetInteger(Console.ReadLine());
             return option;
         }
 
-        static List<int> InsertNumbers()
+        private static List<float> InsertNumbers()
         {
             string stringInput = String.Empty;
-            List<int> numArray = new List<int>();
+            List<float> numArray = new List<float>();
             do
             {
-                Console.WriteLine("Introduzca un número o ponga 'done' para finalizar");
+                Console.WriteLine("Introduzca un número o escriba "+exitExpression+" para finalizar");
                 stringInput = Console.ReadLine();
                 if(stringInput != exitExpression)
                 {
-                    numArray.Add(InputValidator.GetNumeric(stringInput));
+                    numArray.Add(InputValidator.GetDecimal(stringInput));
                 }
                 
             } while (stringInput != exitExpression);
+
             return numArray;
+        }
+
+        private static void ShowResult(IEnumerable<float> numbers)
+        {
+            float averageresult = Operations.GetAverage(numbers);
+
+            Console.Clear();
+            Console.WriteLine(string.Format("Los numeros introducidos son: {0}", String.Join("-",numbers)));
+            Console.WriteLine("El promedio es: " + averageresult.ToString(decimalFormat));
+            Console.WriteLine(Operations.GetMaxMin(numbers));
+            Console.WriteLine(string.Format("La desviacion standard es: {0}", Operations.GetStandardDeviation(numbers, averageresult).ToString(decimalFormat)));
         }
     }
 }

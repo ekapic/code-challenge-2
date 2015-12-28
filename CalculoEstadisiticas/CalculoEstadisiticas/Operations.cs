@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CalculoEstadisiticas
+﻿namespace CalculoEstadisiticas
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public static class Operations
     {
-        public static float GetMedia(IEnumerable<int> numList)
+        public static float GetAverage(IEnumerable<float> numList)
         {
            int suma = 0;
            foreach(int number in numList)
@@ -18,13 +16,61 @@ namespace CalculoEstadisiticas
            return suma / numList.Count();
         }
 
-        //public static float GetMaxMin(IEnumerable<int> numList)
-        //{
-        //    int[] vector1 = numList.ToArray();
-        //    int[] vector2 = numList.ToArray();
+        public static string GetMaxMin(IEnumerable<float> numList)
+        {
+            float max = numList.ElementAt(0);
+            float min = numList.ElementAt(0);
+            string result = String.Empty;
 
-        //    int min = vector1[0];
-        //    int max = vector2[0];
-        //}
+            foreach(int number in numList)
+            {
+                if(number > max)
+                {
+                    max = number;
+                }
+                else if(number < min)
+                {
+                    min = number;
+                }
+            }
+            result = string.Format("El valor mínimo es: {0} y el máximo es: {1}", min,max);
+            return result; 
+        }
+
+        public static double GetStandardDeviation(IEnumerable<float> numList, float averageResult)
+        {
+            List<float> resultList = new List<float>();
+            float poweredAvg;
+            foreach(float num in numList)
+            {
+                resultList.Add(GetPow(num - averageResult, 2));
+            }
+
+            poweredAvg = GetAverage(resultList);
+
+            return GetSquareRoot(poweredAvg);
+        }
+
+        private static float GetSquareRoot(float num)
+        {
+            float x = num, x1;
+            int i;
+            do
+            {
+                x1 = x;
+                x = (((x * x) + num) / (2 * x));
+            } while (x != x1);
+            return x;
+        }
+
+        private static float GetPow(float numbase, int exponent)
+        {
+            float result = 1;
+            for (int i = 0; i < exponent; i++)
+            {
+                result = result * numbase;
+            }
+            return result;
+        }
     }
 }
