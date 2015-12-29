@@ -13,6 +13,8 @@
         private static void Main(string[] args)
         {            
             IEnumerable<float> numbers;
+            string readLine = String.Empty;
+            FileManager filemanager = new FileManager();
             int op = MainMenu();
 
             while (op > exitNumber)
@@ -24,7 +26,7 @@
                         ShowResult(numbers);
                         break;
                     case 2:
-                        //TODO: Leer de fichero devolver lista de numeros
+                        readLine = filemanager.TextReader();
                         //TODO: Llamar a ShowResult(numbers)
                         break;
 

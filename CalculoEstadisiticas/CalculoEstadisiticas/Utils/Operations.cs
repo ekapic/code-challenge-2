@@ -41,24 +41,23 @@
         {
             List<float> resultList = new List<float>();
             float poweredAvg;
-            foreach(float num in numList)
+            foreach (float num in numList)
             {
-                resultList.Add(GetPow(num - averageResult, 2));
+                resultList.Add(GetPow((num - averageResult), 2));
             }
 
             poweredAvg = GetAverage(resultList);
-
             return GetSquareRoot(poweredAvg);
         }
 
         private static float GetSquareRoot(float num)
         {
             float x = num, x1;
-            int i;
             do
             {
                 x1 = x;
                 x = (((x * x) + num) / (2 * x));
+
             } while (x != x1);
             return x;
         }
