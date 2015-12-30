@@ -13,7 +13,7 @@ namespace CalculoEstadisiticas
         public const int exitNumber = 0;
         public const string exitExpression = "done";
         public const string decimalFormat = "0.00";
-        public const string textfileRoute = "test.txt";
+        public const string textfileRoute = @"/Users/z/Desktop/test2.txt";
         public const string textNumberSeparator = "-";
     }
 }
