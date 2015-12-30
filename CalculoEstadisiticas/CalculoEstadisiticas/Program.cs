@@ -20,10 +20,10 @@
                     case 1:
                         numbers = InsertNumbers();
                         ShowResult(numbers);
-                        filemanager.TextWriter(string.Join(Constants.textNumberSeparator, numbers));
+                        filemanager.TextWriter(string.Join(Constants.textNumberSeparator, numbers), Constants.textfileRoute);
                         break;
                     case 2:
-                        readLine = filemanager.TextReader();
+                        readLine = filemanager.TextReader(Constants.textfileRoute);
                         if(!string.IsNullOrEmpty(readLine))
                         {
                             var aux = readLine.Split('-');

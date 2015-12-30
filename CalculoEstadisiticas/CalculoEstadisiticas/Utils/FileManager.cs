@@ -8,13 +8,13 @@ namespace CalculoEstadisiticas
 
     public class FileManager
     {
-        public string TextReader()
+        public string TextReader(string fileroute)
         {
             string line = string.Empty;
             string sequence = string.Empty;
             try
-            {            
-                StreamReader file = new System.IO.StreamReader(Constants.textfileRoute);
+            {
+                StreamReader file = new System.IO.StreamReader(fileroute);
                 while((line = file.ReadLine()) != null)
                 {
                     sequence += line;
@@ -29,7 +29,7 @@ namespace CalculoEstadisiticas
             }
         }
 
-        public void TextWriter(string text)
+        public void TextWriter(string text, string fileroute)
         {
             try
             {
