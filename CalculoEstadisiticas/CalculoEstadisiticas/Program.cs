@@ -24,9 +24,12 @@
                         break;
                     case 2:
                         readLine = filemanager.TextReader();
-                        var aux = readLine.Split('-');
-                        numbers = aux.Select(x => float.Parse(x)).ToList();
-                        ShowResult(numbers);
+                        if(!string.IsNullOrEmpty(readLine))
+                        {
+                            var aux = readLine.Split('-');
+                            numbers = aux.Select(x => float.Parse(x)).ToList();
+                            ShowResult(numbers);
+                        }
                         break;
 
                     default:
@@ -34,7 +37,6 @@
                         break;
                 }
                 op = MainMenu();
-                //Console.Clear();
             }
         }
 
@@ -71,8 +73,6 @@
         private static void ShowResult(IEnumerable<float> numbers)
         {
             float averageresult = Operations.GetAverage(numbers);
-
-            //Console.Clear();
             Console.WriteLine(string.Format("Los numeros introducidos son: {0}", String.Join("-",numbers)));
             Console.WriteLine("El promedio es: " + averageresult.ToString(Constants.decimalFormat));
             Console.WriteLine(Operations.GetMaxMin(numbers));

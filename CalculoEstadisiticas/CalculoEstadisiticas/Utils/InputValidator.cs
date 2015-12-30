@@ -12,8 +12,7 @@ namespace CalculoEstadisiticas
             bool isDecimal = float.TryParse(readLine,out number);
             while (!isDecimal || number < 0)
             {
-                Console.WriteLine("Introduce un numero decimal");
-                readLine = Console.ReadLine();
+                readLine = AskNumber();
                 isDecimal = float.TryParse(readLine, out number);
             }
             return number;
@@ -25,11 +24,19 @@ namespace CalculoEstadisiticas
             bool isInteger = int.TryParse(readLine,out number);
             while (!isInteger || number < 0)
             {
-                Console.WriteLine("Introduce un numero entero");
-                readLine = Console.ReadLine();
+                readLine = AskNumber();
                 isInteger = int.TryParse(readLine, out number);
             }
             return number;
         }
+        
+        static private string AskNumber()
+        {
+            string readLine = string.Empty;
+            Console.WriteLine("Introduce un numero valido");
+            readLine = Console.ReadLine();
+            return readLine;
+        }
+
     }
 }
