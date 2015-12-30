@@ -45,7 +45,6 @@
             {
                 resultList.Add(GetPow((num - averageResult), 2));
             }
-
             poweredAvg = GetAverage(resultList);
             return GetSquareRoot(poweredAvg);
         }

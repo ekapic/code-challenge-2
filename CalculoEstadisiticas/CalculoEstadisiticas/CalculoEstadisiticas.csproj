@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileManager.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Utils\FileManager.cs" />
     <Compile Include="Utils\InputValidator.cs" />
     <Compile Include="Utils\Operations.cs" />
     <Compile Include="Program.cs" />
@@ -51,7 +52,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="test.txt" />
+    <EmbeddedResource Include="Files\test.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

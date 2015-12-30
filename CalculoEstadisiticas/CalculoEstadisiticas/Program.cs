@@ -3,13 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
-
+    using System.Linq;
     class Program
     {
-        const int exitNumber = 0;
-        const string exitExpression = "done";
-        const string decimalFormat = "0.00";
-
         private static void Main(string[] args)
         {            
             IEnumerable<float> numbers;
@@ -17,17 +13,20 @@
             FileManager filemanager = new FileManager();
             int op = MainMenu();
 
-            while (op > exitNumber)
+            while (op > Constants.exitNumber)
             {
                 switch (op)
                 {
                     case 1:
                         numbers = InsertNumbers();
                         ShowResult(numbers);
+                        filemanager.TextWriter(string.Join(Constants.textNumberSeparator, numbers));
                         break;
                     case 2:
                         readLine = filemanager.TextReader();
-                        //TODO: Llamar a ShowResult(numbers)
+                        var aux = readLine.Split('-');
+                        numbers = aux.Select(x => float.Parse(x)).ToList();
+                        ShowResult(numbers);
                         break;
 
                     default:
@@ -35,7 +34,7 @@
                         break;
                 }
                 op = MainMenu();
-                Console.Clear();
+                //Console.Clear();
             }
         }
 
@@ -57,14 +56,14 @@
             List<float> numArray = new List<float>();
             do
             {
-                Console.WriteLine("Introduzca un número o escriba "+exitExpression+" para finalizar");
+                Console.WriteLine("Introduzca un número o escriba "+Constants.exitExpression+" para finalizar");
                 stringInput = Console.ReadLine();
-                if(stringInput != exitExpression)
+                if(stringInput != Constants.exitExpression)
                 {
                     numArray.Add(InputValidator.GetDecimal(stringInput));
                 }
                 
-            } while (stringInput != exitExpression);
+            } while (stringInput != Constants.exitExpression);
 
             return numArray;
         }
@@ -73,11 +72,11 @@
         {
             float averageresult = Operations.GetAverage(numbers);
 
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine(string.Format("Los numeros introducidos son: {0}", String.Join("-",numbers)));
-            Console.WriteLine("El promedio es: " + averageresult.ToString(decimalFormat));
+            Console.WriteLine("El promedio es: " + averageresult.ToString(Constants.decimalFormat));
             Console.WriteLine(Operations.GetMaxMin(numbers));
-            Console.WriteLine(string.Format("La desviacion standard es: {0}", Operations.GetStandardDeviation(numbers, averageresult).ToString(decimalFormat)));
+            Console.WriteLine(string.Format("La desviacion standard es: {0}", Operations.GetStandardDeviation(numbers, averageresult).ToString(Constants.decimalFormat)));
         }
     }
 }
