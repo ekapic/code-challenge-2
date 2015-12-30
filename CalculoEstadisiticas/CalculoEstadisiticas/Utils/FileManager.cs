@@ -29,7 +29,7 @@ namespace CalculoEstadisiticas
             }
         }
 
-        public bool TextWriter(string text)
+        public void TextWriter(string text)
         {
             try
             {
@@ -38,7 +38,6 @@ namespace CalculoEstadisiticas
                     StreamWriter sw = new StreamWriter(Constants.textfileRoute);
                     sw.WriteLine(text);
                     sw.Close();
-                    return true; 
                 }
                 else
                 {
@@ -48,7 +47,6 @@ namespace CalculoEstadisiticas
             catch(Exception ex)
             {
                 Console.WriteLine(string.Format("Error al escribir en fichero: {0}",ex.Message));
-                return false;
             }
         }
 
