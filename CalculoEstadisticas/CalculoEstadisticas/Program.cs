@@ -13,27 +13,48 @@
             string value;
             int output;
             var list = new List<int>();
+
+            Console.WriteLine("**** CALCULO DE ESTADISTICAS ****");
+            Console.WriteLine();
+            Console.WriteLine();
+
             do
             {
-                Console.WriteLine("Escribe un numbero");
+                Console.Write("Escribe un numbero: ");
                 value = Console.ReadLine();
-                if (Int32.TryParse(value, out output))
+                if (Int32.TryParse(value, out output) && output >= 0)
                 {
                     list.Add(output);
+                }
+                else
+                {
+                    if (value != "done")
+                    {
+                        Console.WriteLine("No es un número valido");
+                    }
                 }
             }
             while (value != "done");
 
-            Console.Write("Números: ");
-            foreach (var number in list)
+            if (list.Count > 0)
             {
-                Console.Write(number + ", ");
+                Console.WriteLine();
+                Console.Write("Números: ");
+                foreach (var number in list)
+                {
+                    Console.Write(number + " ");
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("El numero promedio es: " + Promedio(list).ToString());
+                Console.WriteLine("El numero mínimo es: " + list.Min().ToString());
+                Console.WriteLine("El numero máximo es: " + list.Max().ToString());
+                Console.WriteLine("La desviación estándar es: " + Desviacion(list).ToString());
             }
-            Console.WriteLine();
-            Console.WriteLine("El numero promedio es: " + Promedio(list).ToString());
-            Console.WriteLine("El numero mínimo es: " + list.Min());
-            Console.WriteLine("El numero máximo es: " + list.Max());
-            Console.WriteLine("La desviación estándar es: " + Desviacion(list).ToString());
+            else
+            {
+                Console.WriteLine("No has introducido nungún número");
+            }
         }
 
         private static double Desviacion(List<int> list)
@@ -66,6 +87,7 @@
 //Convertir de manera explícita los valores numéricos de salida a strings
 //Vigilar de no introducir el "done" como uno de los elementos de la matriz de entrada
 //Vigilar de que el programa resultante esté debidamente encapsulado en clases y métodos públicos y privados
+
 //Para nota
 
 //Leer los números de un fichero de texto en vez de pedirlos en el bucle
