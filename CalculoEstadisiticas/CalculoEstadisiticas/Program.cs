@@ -88,6 +88,7 @@
             return numArray;
         }
 
+
         private static void ShowResult(IEnumerable<float> numbers)
         {
             float averageresult = Operations.GetAverage(numbers);

@@ -35,6 +35,7 @@ namespace CalculoEstadisiticas
             {
                 if(!string.IsNullOrEmpty(text))
                 {
+
                     StreamWriter sw = new StreamWriter(Constants.textfileRoute);
                     sw.WriteLine(text);
                     sw.Close();
