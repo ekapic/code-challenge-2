@@ -22,7 +22,7 @@ Ejemplo de salida del programa
     El promedio es 400.
     El mínimo es 100.
     El máximo es 1000.
-    La desviación estándar es 400,25.
+    La desviación estándar es 353,55.
  
 Restricciones
 -------------
