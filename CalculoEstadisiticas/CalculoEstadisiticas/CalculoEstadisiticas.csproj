@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Utils\FileManager.cs" />
-    <Compile Include="Utils\InputValidator.cs" />
     <Compile Include="Utils\Operations.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -55,11 +55,10 @@
             Console.WriteLine("-----------------------------------");
 
             input = Console.ReadLine();
-            while (!InputValidator.IsInteger(input))
+            while (!int.TryParse(input, out option))
             {
                 input = AskNumber();
             }
-            option = int.Parse(input);
 
             return option;
         }
