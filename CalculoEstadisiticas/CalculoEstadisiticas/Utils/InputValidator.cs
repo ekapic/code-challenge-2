@@ -18,7 +18,6 @@ namespace CalculoEstadisiticas
             int number;
             bool isInteger = int.TryParse(readLine, out number);
             return isInteger;
-        }
-        
+        }      
     }
 }

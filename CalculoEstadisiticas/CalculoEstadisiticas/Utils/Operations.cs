@@ -16,25 +16,28 @@
            return suma / numList.Count();
         }
 
-        public static string GetMaxMin(IEnumerable<float> numList)
+        public static float GetMinValue(IEnumerable<float> numList)
         {
-            float max = numList.ElementAt(0);
-            float min = numList.ElementAt(0);
-            string result = String.Empty;
+            return GetValues(numList, (a, b) => a < b);
+        }
+
+        public static float GetMaxValue(IEnumerable<float> numList)
+        {
+            return GetValues(numList, (a, b) => a > b);
+        }
+
+        public static float GetValues(IEnumerable<float> numList, Func<float, float, bool> compareNumbers)
+        {
+            float currentNumber = numList.ElementAt(0);
 
             foreach(int number in numList)
             {
-                if(number > max)
+                if (compareNumbers(number, currentNumber))
                 {
-                    max = number;
-                }
-                else if(number < min)
-                {
-                    min = number;
+                    currentNumber = number;
                 }
             }
-            result = string.Format("El valor mínimo es: {0} y el máximo es: {1}", min,max);
-            return result; 
+            return currentNumber; 
         }
 
         public static double GetStandardDeviation(IEnumerable<float> numList, float averageResult)

@@ -19,8 +19,12 @@
                 {
                     case 1:
                         numbers = InsertNumbers();
-                        ShowResult(numbers);
-                        filemanager.TextWriter(string.Join(Constants.textNumberSeparator.ToString(), numbers), Constants.textfileRoute);
+                        if(numbers.Count() > 1)
+                        {
+                            ShowResult(numbers);
+                            filemanager.TextWriter(string.Join(Constants.textNumberSeparator.ToString(), numbers), Constants.textfileRoute);
+                        }
+                        
                         break;
                     case 2:
                         readLine = filemanager.TextReader(Constants.textfileRoute);
@@ -63,7 +67,9 @@
         private static List<float> InsertNumbers()
         {
             string stringInput = String.Empty;
+            float number=0;
             List<float> numArray = new List<float>();
+
             do
             {
                 Console.WriteLine("Introduzca un número o escriba " + Constants.exitExpression + " para finalizar");
@@ -71,11 +77,11 @@
 
                 if(stringInput != Constants.exitExpression)
                 {
-                    while(!InputValidator.IsDecimal(stringInput))
+                    while(!float.TryParse(stringInput,out number))
                     {
                         stringInput = AskNumber();
                     }
-                    numArray.Add(float.Parse(stringInput));
+                    numArray.Add(number);
                 }
                 
             } while (stringInput != Constants.exitExpression);
@@ -87,8 +93,9 @@
         {
             float averageresult = Operations.GetAverage(numbers);
             Console.WriteLine(string.Format("Los numeros introducidos son: {0}", String.Join(Constants.textNumberSeparator.ToString(),numbers)));
-            Console.WriteLine("El promedio es: " + averageresult.ToString(Constants.decimalFormat));
-            Console.WriteLine(Operations.GetMaxMin(numbers));
+            Console.WriteLine(string.Format("El promedio es: {0}", averageresult.ToString(Constants.decimalFormat)));
+            Console.WriteLine(string.Format("El valor mínimo es: {0}", Operations.GetMinValue(numbers)));
+            Console.WriteLine(string.Format("El valor mínimo es: {0}", Operations.GetMaxValue(numbers)));
             Console.WriteLine(string.Format("La desviacion standard es: {0}", Operations.GetStandardDeviation(numbers, averageresult).ToString(Constants.decimalFormat)));
         }
 

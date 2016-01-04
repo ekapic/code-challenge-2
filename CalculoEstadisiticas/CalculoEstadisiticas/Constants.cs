@@ -14,6 +14,6 @@ namespace CalculoEstadisiticas
         public const string exitExpression = "done";
         public const string decimalFormat = "0.00";
         public const string textfileRoute = "test.txt";
-        public const char textNumberSeparator = '-';
+        public const char textNumberSeparator = '|';
     }
 }
