@@ -6,37 +6,19 @@ namespace CalculoEstadisiticas
 
     static class InputValidator
     {
-        static public float GetDecimal(string readLine)
+        static public bool IsDecimal(string readLine)
         {
             float number;
-            bool isDecimal = float.TryParse(readLine,out number);
-            while (!isDecimal || number < 0)
-            {
-                readLine = AskNumber();
-                isDecimal = float.TryParse(readLine, out number);
-            }
-            return number;
+            bool isDecimal = float.TryParse(readLine, out number);
+            return isDecimal;
         }
 
-        static public int GetInteger(string readLine)
+        static public bool IsInteger(string readLine)
         {
             int number;
-            bool isInteger = int.TryParse(readLine,out number);
-            while (!isInteger || number < 0)
-            {
-                readLine = AskNumber();
-                isInteger = int.TryParse(readLine, out number);
-            }
-            return number;
+            bool isInteger = int.TryParse(readLine, out number);
+            return isInteger;
         }
         
-        static private string AskNumber()
-        {
-            string readLine = string.Empty;
-            Console.WriteLine("Introduce un numero valido");
-            readLine = Console.ReadLine();
-            return readLine;
-        }
-
     }
 }

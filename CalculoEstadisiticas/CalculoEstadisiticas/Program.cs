@@ -42,13 +42,21 @@
 
         private static int MainMenu()
         {
+            string input = string.Empty;
             int option = 0;
             Console.WriteLine("-----------------------------------");
             Console.WriteLine("1.-Introducción manual de datos");
             Console.WriteLine("2.-Lectura de fichero de datos");
             Console.WriteLine("0.-Salir");
             Console.WriteLine("-----------------------------------");
-            option = InputValidator.GetInteger(Console.ReadLine());
+
+            input = Console.ReadLine();
+            while (!InputValidator.IsInteger(input))
+            {
+                input = AskNumber();
+            }
+            option = int.Parse(input);
+
             return option;
         }
 
@@ -62,7 +70,11 @@
                 stringInput = Console.ReadLine();
                 if(stringInput != Constants.exitExpression)
                 {
-                    numArray.Add(InputValidator.GetDecimal(stringInput));
+                    while(!InputValidator.IsDecimal(stringInput))
+                    {
+                        stringInput = AskNumber();
+                    }
+                    numArray.Add(float.Parse(stringInput));
                 }
                 
             } while (stringInput != Constants.exitExpression);
@@ -77,6 +89,14 @@
             Console.WriteLine("El promedio es: " + averageresult.ToString(Constants.decimalFormat));
             Console.WriteLine(Operations.GetMaxMin(numbers));
             Console.WriteLine(string.Format("La desviacion standard es: {0}", Operations.GetStandardDeviation(numbers, averageresult).ToString(Constants.decimalFormat)));
+        }
+
+        private static string AskNumber()
+        {
+            string readLine = string.Empty;
+            Console.WriteLine("Introduce un numero valido");
+            readLine = Console.ReadLine();
+            return readLine;
         }
     }
 }
