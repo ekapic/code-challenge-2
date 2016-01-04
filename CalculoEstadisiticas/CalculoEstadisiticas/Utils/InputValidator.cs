@@ -4,7 +4,7 @@ namespace CalculoEstadisiticas
 {
     using System;
 
-    static class InputValidator
+    public static class InputValidator
     {
         static public bool IsDecimal(string readLine)
         {
