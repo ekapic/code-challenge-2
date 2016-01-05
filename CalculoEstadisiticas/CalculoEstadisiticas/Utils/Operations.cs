@@ -15,6 +15,18 @@
            }
            return suma / numList.Count();
         }
+      
+        public static double GetStandardDeviation(IEnumerable<float> numList, float averageResult)
+        {
+            List<float> resultList = new List<float>();
+            float poweredAvg;
+            foreach (float num in numList)
+            {
+                resultList.Add(GetPow((num - averageResult), 2));
+            }
+            poweredAvg = GetAverage(resultList);
+            return GetSquareRoot(poweredAvg);
+        }
 
         public static float GetMinValue(IEnumerable<float> numList)
         {
@@ -26,30 +38,18 @@
             return GetValues(numList, (a, b) => a > b);
         }
 
-        public static float GetValues(IEnumerable<float> numList, Func<float, float, bool> compareNumbers)
+        private static float GetValues(IEnumerable<float> numList, Func<float, float, bool> compareNumbers)
         {
             float currentNumber = numList.ElementAt(0);
 
-            foreach(int number in numList)
+            foreach (int number in numList)
             {
                 if (compareNumbers(number, currentNumber))
                 {
                     currentNumber = number;
                 }
             }
-            return currentNumber; 
-        }
-
-        public static double GetStandardDeviation(IEnumerable<float> numList, float averageResult)
-        {
-            List<float> resultList = new List<float>();
-            float poweredAvg;
-            foreach (float num in numList)
-            {
-                resultList.Add(GetPow((num - averageResult), 2));
-            }
-            poweredAvg = GetAverage(resultList);
-            return GetSquareRoot(poweredAvg);
+            return currentNumber;
         }
 
         private static float GetSquareRoot(float num)
