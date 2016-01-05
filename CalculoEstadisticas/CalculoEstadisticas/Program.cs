@@ -11,16 +11,19 @@
 //Leer los números de un fichero de texto en vez de pedirlos en el bucle
 //Preguntar al usuario si se usará un fichero o la introducción manual de datos
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-
 namespace CalculoEstadisticas
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+
     internal class Program
     {
+        private static readonly Validator Validator = new Validator();
+        private static readonly CalculadoraEstadisticasService EstadisticasService = new CalculadoraEstadisticasService();
+
         private static void Main(string[] args)
         {
             var list = new List<int>();
@@ -34,7 +37,7 @@ namespace CalculoEstadisticas
             {
                 Console.WriteLine("¿Usara un fichero o introducira los datos manualmente?");
                 Console.WriteLine("1 - Fichero");
-                Console.WriteLine("2 - Manualmente");
+                Console.WriteLine("2 - Manualmente. Introduzca 'done' para finalizar");
 
                 var option = Console.ReadLine();
                 switch (option)
@@ -68,7 +71,7 @@ namespace CalculoEstadisticas
             {
                 var values = line.Split(';');
                 var number = 0;
-                list.AddRange(from item in values where int.TryParse(item, out number) select number);
+                list.AddRange(from value in values where Validator.IsValidNumber(value, out number) && number >= 0 select number);
             }
         }
 
@@ -87,15 +90,12 @@ namespace CalculoEstadisticas
 
         private static void PrintStadisticResults(List<int> list)
         {
-            var estadisticasService = new CalculadoraEstadisticasService();
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("El numero promedio es: " +
-                              estadisticasService.Promedio(list).ToString("0.00", CultureInfo.InvariantCulture));
+            Console.WriteLine("El numero promedio es: " + EstadisticasService.Promedio(list).ToString("0.00", CultureInfo.InvariantCulture));
             Console.WriteLine("El numero mínimo es: " + list.Min());
             Console.WriteLine("El numero máximo es: " + list.Max());
-            Console.WriteLine("La desviación estándar es: " +
-                              estadisticasService.Desviacion(list).ToString("0.00", CultureInfo.InvariantCulture));
+            Console.WriteLine("La desviación estándar es: " + EstadisticasService.Desviacion(list).ToString("0.00", CultureInfo.InvariantCulture));
         }
 
         private static void PrintNumbers(IEnumerable<int> list)
@@ -108,7 +108,7 @@ namespace CalculoEstadisticas
             }
         }
 
-        private static void GetInputData(List<int> list)
+        private static void GetInputData(ICollection<int> list)
         {
             string value;
             do
@@ -116,7 +116,7 @@ namespace CalculoEstadisticas
                 Console.Write("Escribe un numbero: ");
                 value = Console.ReadLine();
                 int output;
-                if (int.TryParse(value, out output) && output >= 0)
+                if (Validator.IsValidNumber(value, out output) && output >= 0)
                 {
                     list.Add(output);
                 }
