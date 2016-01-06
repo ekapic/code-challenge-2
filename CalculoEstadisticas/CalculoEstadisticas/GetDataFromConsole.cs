@@ -8,12 +8,13 @@
     public class GetDataFromConsole
     {
         private List<int> _list;
+        private Helpers _helper = new Helpers();
 
         public void GetValues(List<int> list)
         {
             _list = list;
             InputValues();
-            PrintValues();
+            this._helper.PrintValues(this._list);
         }
 
         #region Private Methods
@@ -29,28 +30,9 @@
             {
                 Console.Write($"{Constants.ConsoleText.IntroduceData} ");
                 value = Console.ReadLine();
-                CheckValues(value);
+                this._helper.CheckValues(value, this._list, Constants.Errors.ErrorIntroduceData);
+
             } while (!value.ToUpper().Equals(Constants.Done));
-        }
-
-        private void CheckValues(string value)
-        {
-            if (value.ToUpper().Equals(Constants.Done)) { return; }
-
-            if (value.IsIntegerAndGreaterThanZero())
-            {
-                this._list.Add(int.Parse(value));
-            }
-            else
-            {
-                Console.WriteLine(Constants.Errors.ErrorIntroduceData);
-            }
-        }
-
-        private void PrintValues()
-        {
-            Console.Write(Constants.ConsoleText.PrintNumers);
-            Console.WriteLine(string.Join(",", this._list));
         }
 
         #endregion Private Methods
