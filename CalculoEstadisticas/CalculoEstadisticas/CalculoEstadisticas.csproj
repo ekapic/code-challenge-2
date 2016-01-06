@@ -51,7 +51,6 @@
     <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\Helpers.cs" />
     <Compile Include="Utils\ListExtension.cs" />
-    <Compile Include="Utils\SelectInputOptionEnum.cs" />
     <Compile Include="Utils\StringExtension.cs" />
   </ItemGroup>
   <ItemGroup>
