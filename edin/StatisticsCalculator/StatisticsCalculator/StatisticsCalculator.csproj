@@ -7,7 +7,7 @@
     <ProjectGuid>{FE082228-F5BD-45C0-A430-EF9CB58795C3}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StatisticsCalculator</RootNamespace>
+    <RootNamespace>CodeChallenge2</RootNamespace>
     <AssemblyName>StatisticsCalculator</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -41,9 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleNumberSource.cs" />
+    <Compile Include="FileNumberSource.cs" />
+    <Compile Include="InputType.cs" />
+    <Compile Include="INumberSource.cs" />
+    <Compile Include="NumberProviderFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StatisticsCalculator.cs" />
+    <Compile Include="StatisticsResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
