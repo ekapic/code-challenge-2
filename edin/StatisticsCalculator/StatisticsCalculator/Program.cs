@@ -10,17 +10,32 @@ namespace CodeChallenge2
     {
         static void Main(string[] args)
         {
-            InputType inputType = GetInputTypeFromUser();
-            
-            INumberSource numbersSource = NumberProviderFactory.MakeNumberSource(inputType);
+            try
+            {
+                InputType inputType = GetInputTypeFromUser();
 
-            IEnumerable<int> numbersToProcess = numbersSource.GetNumbers();
-            DisplayNumbers(numbersToProcess);
-            var calculator = new StatisticsCalculator();
-            var statistics = calculator.CalculateStatistics(numbersToProcess);
-            DisplayStatistics(statistics);
+                INumberSource numbersSource = NumberProviderFactory.MakeNumberSource(inputType);
 
+                IEnumerable<int> numbersToProcess = numbersSource.GetNumbers();
+                DisplayNumbers(numbersToProcess);
+                var calculator = new StatisticsCalculator();
+                var statistics = calculator.CalculateStatistics(numbersToProcess);
+                DisplayStatistics(statistics);
+            }
+            catch (Exception ex)
+            {
+                DisplayError(ex);
+            }
             Console.ReadLine();
+        }
+
+        private static void DisplayError(Exception ex)
+        {
+            var oldColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("Error: ");
+            Console.WriteLine(ex.ToString());
+            Console.ForegroundColor = oldColor;
         }
 
         private static InputType GetInputTypeFromUser()
